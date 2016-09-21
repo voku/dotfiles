@@ -33,6 +33,19 @@
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Simulate ALT-<key> by mapping escape sequences to key combination. This is
+" required for terminals which do not send ALT combinations in 8-bit.
+" See http://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim/10216459#10216459
+" this applies also to cygwin's mintty.
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+set ttimeout ttimeoutlen=25 "this is the timeout to distinguish e.g. <A-k> from 'ESC <timeout> k'
+
 " make Vim more useful
 set nocompatible
 
