@@ -13,7 +13,6 @@
 
 [core]
   pager = less -FRSX
-	autocrlf = true
 
 [alias]
   co = checkout

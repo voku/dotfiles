@@ -20,6 +20,11 @@ for al in `__git_aliases`; do
     function_exists $complete_fnc && __git_complete g$al $complete_func
 done
 
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+    . /usr/share/bash-completion/completions/git
+fi
+
 function code {
     cd ~/code
 }
@@ -35,5 +40,8 @@ HISTSIZE=5000
 HISTFILESIZE=10000
 
 shopt -s histappend
+
+# Add node to path
+export PATH=$PATH:/c/program files/nodejs
 
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
