@@ -42,6 +42,10 @@ HISTFILESIZE=10000
 shopt -s histappend
 
 # Add node to path
-export PATH=$PATH:/c/program files/nodejs
+export PATH=$PATH:"/c/program files/nodejs"
+# Add Azure cli
+export PATH=$PATH:"/c/Program Files (x86)/Microsoft SDKs/Azure/CLI2/wbin"
+# Add Terraform
+export PATH=$PATH:"/c/terraform"
 
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
