@@ -1,4 +1,490 @@
-# This is Git's per-user configuration file.
+####################################
+# Global configuration file for Git.
+####################################
+
+# INFO -> this only works for alias?!
+[user]
+name = "!bash -c 'echo \"$CONFIG_GIT_AUTHOR_NAME\";'"
+email = "!bash -c 'echo \"$CONFIG_GIT_AUTHOR_EMAIL\";'"
+
+# A lot of aliases to speed up full-time usage of Git from command line.
+# Long flag names are used for readability wherever possible.
+# Short flags are meant for writing on the command line.
+[alias]
+  # same as git init but creates the git repository in the given path. In a cygwin environment path names are translated to dos style, otherwise the linking would not work in egit (eclipse). Cygwin's git and git-bash is also happy with this.
+  initexternal = "!f() { WORKTREE=\"$(pwd)\"; GITDIR=\"$1\"; command -v cygpath >/dev/null 2>&1 && { WORKTREE=$(cygpath -m $WORKTREE); GITDIR=$(cygpath -m $1); }; git --work-tree=$WORKTREE --git-dir=\"$GITDIR\" init && echo \"gitdir: $GITDIR\" >> .git && git config --local core.worktree \"$WORKTREE\"; }; f"
+
+  #find all direct children of given refs
+  #code borrowed from https://gist.github.com/kohsuke/7590246
+  child = "!f() { for arg in \"$@\"; do for commit in $(git rev-parse $arg^0); do for child in $(git log --format='%H %P' --all | grep -F \" $commit\" | cut -f1 -d' '); do git describe $child 2> /dev/null || echo $child; done; done; done; }; f"
+
+  # Shorthand for add
+  a = add
+
+  # Add all unstaged (including untracked) files.
+  # See`git help add`
+  aa = add --all
+
+  # verbose add
+  add = add -v
+
+  # Make "git grep" look a bit like "ack"/"ag". Note that you need to
+  # specify --no-index to search all files, and that submodules are not
+  # searched.
+  ack = grep --extended-regexp --break --heading --line-number           # Interactive add. Used for patching.
+
+  # See`git help add`
+  ai = add --interactive
+
+  # Interactively choose hunks of patch between the index and the work
+  # tree and add them to the index.
+  ap = add --patch
+
+  # List aliases
+  aliases = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+
+  # Amend the currently staged files to the last commit
+  # See`git help commit`
+  amend = commit --amend --reuse-message=HEAD
+
+  # Shorthand for branch (verbose)
+  b = branch -v
+
+  # Delete a branch only if it is merged in the current branch.
+  # See`git help branch`
+  bd = branch --delete
+
+  # Shorthand for branch --merged
+  bm = branch --merged
+
+  # Shorthand for browse
+  # See`hub help browse`
+  br = browse
+
+  # Show verbose output about branches
+  branches = branch -a
+
+  # Shorthand for commit
+  c = commit -m                     # commit with message
+  ca = commit -am                   # commit all with message
+  cam = commit -am                  # "same as ca"
+  ci = commit                       # commit
+
+  # Shorthand for checkout
+  co = checkout                     # checkout
+  nb = checkout -B                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
+
+  # grab a change from a branch
+  cp = cherry-pick -x
+
+  # Clone a repository including all submodules
+  cl = clone -- recursive
+
+  # Delete all untracked files and directories.
+  # See`git help clean`
+  cleanit = clean -fd
+
+  # Shorthand for config
+  # See`git help config` for config options
+  cn = config
+
+  # Shorthand for global config
+  cng = config --global
+
+  # List contributors with number of commits
+  # See`git help shortlog`
+  contributors = shortlog --summary --numbered
+
+  # Credit an author on the latest commit
+  credit = "!f() { git commit --amend --author \"$1 <$2>\" --reuse-message=HEAD; }; f"
+
+  # diff
+  d = diff                          # diff unstaged changes
+  dc = diff --cached                # diff staged changes
+  da = diff HEAD                # diff unstaged and staged changes
+
+  # Show all conflicted files
+  diff-conflicted-files = diff --name-only --diff-filter=U
+
+  # Show the diff between the latest commit and the current state
+  diff-to-latest-commit = "!git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+  # Show a commit-hash diff between two branches
+  diff-commit-hash-to-branch = "!git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative $1"
+
+  # `git diff-to-x-commit $number` shows the diff between the state `$number` revisions ago and the current state
+  diff-to-x-commit = "!d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+
+  # Pull in remote changes for the current repository and all its submodules
+  p = !"git pull; git submodule foreach git pull origin master"
+
+  # Remove branches that have already been merged with master
+  # a.k.a. delete merged
+  #dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+  # Diff working tree to HEAD (a.k.a last commit).
+  # Using difftool.tool for visualising diffs.
+  # Do not prompt for each file. Use --prompt to override.
+  dt = difftool --no-prompt
+
+  # Diff staging area (a.k.a index) to HEAD (a.k.a last commit).
+  # Using difftool.tool for visualising diffs.
+  # Do not prompt for each file. Use --prompt to override.
+  dtc = difftool --cached --no-prompt
+
+  # Shorthand for fetch
+  f = fetch
+
+  # Find branches containing commit
+  fb = "!f() { git branch -a --contains $1; }; f"
+
+  # Find commits by source code
+  fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+  # Find commits by commit message
+  fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
+
+  # Find tags containing commit
+  ft = "!f() { git describe --always --contains $1; }; f"
+
+  # Switch to a branch, creating it if necessary
+  # Same as chb - left for BC.
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+  # Shorthand for help
+  h = help
+
+  # log
+  l = log --graph --decorate --date=short
+  changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+  short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+  simple = log --pretty=format:\" * %s\"
+  shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+  overview = log --all --oneline --no-merges
+  changelog = "!sh -c \"git log --oneline --no-merges $1..HEAD\" -"
+  filelog = log -u # show changes to a file
+
+  # Pretty log of commits. Supports options of git log
+  # https://www.kernel.org/pub/software/scm/git/docs/git-log.html#_pretty_formats
+  log-pretty = log --graph --decorate --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an - %aE>%Creset' --abbrev-commit
+
+  # last commit
+  last = log -1 HEAD
+
+  # ls alias
+  ls = ls-files
+
+  # Shorthand for merge
+  m = merge
+
+  # Show the not merged branches compared to the current branch
+  nm = branch --no-merged
+
+  # Show the not merged branches compared to the master branch
+  nmm = branch --no-merged master
+
+  # pull
+  pl = pull
+
+  # push
+  ps = push
+
+  # Create a new remote branch with the same name and track it.
+  # First argument is remote name. Defaults to "origin".
+  # Second, third and fourth argument are passed to `git push`.
+  publish = "!p() { [ -z \"$1\" ] && remote=\"origin\" || remote=$1; git push --set-upstream $2 $3 $4 $remote HEAD; }; p"
+
+  # Shorthand for remote (verbose)
+  r = remote -v
+
+  #via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
+  recent-branches = "!git for-each-ref --count=5 --sort=-committerdate refs/heads/ --format='%(refname:short)'"
+
+  # Show verbose output about remotes
+  remotes = remote -v
+
+  # Interactive rebase with the given number of latest commits
+  ri = "!r() { git rebase --interactive HEAD~$1; }; r"
+
+  # Remove the old tag with this name and tag the latest commit with it.
+  retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
+
+  # Update all remotes
+  ru = remote update
+
+  # rebase
+  rc = rebase --continue            # continue rebase
+  rs = rebase --skip                # skip rebase
+
+  # grep alias
+  search = grep
+
+  # find a string in the entire git history
+  search-git-history = "!r() { git rev-list --all | xargs git grep -F $1; }; r"
+
+  # reset
+  unstage = reset HEAD              # remove files from index (tracking)
+  uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
+
+  mt = mergetool                    # fire up the merge tool
+
+  # View the current working tree status using the short format
+  # Show the current branch as well
+  # See`git help status`
+  s = status -s                     # status
+  st = status                       # status
+  stat = status                     # status
+
+  # shorthand for shortlog
+  shl = shortlog
+
+  # stash
+  ss = stash                        # stash changes
+  sl = stash list                   # list stashes
+  sa = stash apply                  # apply stash (restore changes)
+  sd = stash drop                   # drop stashes (destory changes)
+
+  # Shorthand for tag
+  t = tag -n                        # show tags with <n> lines of each tag message
+
+  # show verbose output about tags
+  tags = tag -l
+
+[apply]
+  # detect whitespace errors when applying a patch
+  whitespace = warn
+
+  # automagically fix whitespace
+  #whitespace = fix
+
+[commit]
+  template = ~/.gitmessage
+
+[color]
+  # Use colors in Git commands that are capable of colored output when
+  # outputting to the terminal. (This is the default setting in Git ≥ 1.8.4.)
+  ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  pager  = true
+
+[color "branch"]
+  # Highlight current. Yellow local branches; Green remotes.
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  # Yellow meta; Magenta line info; Red for deleltions; Green for additions.
+  meta = yellow
+  frag = magenta              # line info
+  old = red                   # deletions
+  new = green                 # additions
+  whitespace = red reverse
+
+[color "status"]
+  # Changed files are yellow.
+  # Staged files are green.
+  # New (untracked) files are cyan.
+  # Headers are gray (white dimmed)
+  # Branch is always green even in headers
+  added = green
+  branch = green
+  changed = yellow
+  header = white dim
+  untracked = cyan
+
+[core]
+  # Global `.gitattributes`
+  attributesfile = ~/.gitattributes
+
+  # Default editor for commit messages and other inputs
+  # Even when EDITOR is set to something else
+  editor=vim
+
+  # Global `.gitignore`
+  excludesfile = ~/.gitignore_global
+
+  # Make `git rebase` safer on OS X
+  # More info: http://www.git-tower.com/blog/make-git-rebase-safe-on-osx
+  trustctime = false
+
+  # Prevent showing files whose names contain non-ASCII symbols as unversioned.
+  # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+  precomposeunicode = false
+
+  # Speed up commands involving untracked files such as `git status`.
+  # https://git-scm.com/docs/git-update-index#_untracked_cache
+  untrackedCache = true
+
+  # Treat
+  #  - spaces before tabs,
+  #  - all kinds of trailing whitespace
+  # as an error.
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+  # Make `git rebase` safer on macOS
+  # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+  trustctime = false
+
+  # https://stackoverflow.com/questions/18257622/why-is-git-core-preloadindex-default-value-false/18259086
+  preloadindex = true
+
+  # Enable the filesystem cache (for git bash | windows)
+  fscache = true
+
+[diff]
+  # Use more time to create better diffs.
+  # E.g. matching opening/closing braces from neighbour functions.
+  # See "`git help diff` --patience" and "`git help merge` recursive".
+  algorithm = patience
+
+  # (git 2.9+) Set this option to `true` to enable an experimental heuristic that
+  # shifts the hunk boundary in an attempt to make the resulting
+  # patch easier to read.
+  compactionHeuristic = true
+
+  renamelimit = 9999
+
+  color = auto
+
+  # Tells git to detect renames. If set to any boolean value,
+  # it will enable basic rename detection. If set to "copies" or "copy",
+  # it will detect copies, as well.
+  renames = copies
+
+  # Default to opendiff for visualising diffs.
+  # opendiff opens FileMerge
+  # Override with --tool=<tool> in difftool
+  # See`git help difftool`
+  # If `opendiff` is not in your $PATH, override with difftool.opendiff.path
+  # See`git help config` and search for "diff.tool"
+  #tool = opendiff
+  tool = vimdiff
+
+[difftool]
+  # Difftool will not prompt for every file.
+  # Use --prompt to override.
+  #prompt = false
+
+[status]
+  color = auto
+
+[merge]
+  #tool = opendiff
+  tool = vimdiff
+
+  # Always show a diffstat at the end of a merge
+  stat = true
+
+  # Git has an option to display merge conflicts in diff3 format (by default it only displays the two files to be merged).
+  conflictstyle = diff3
+
+  # Include summaries of merged commits in newly created merge commit messages
+  log = true
+
+[mergetool]
+  # No *.orig files left when using mergetool.
+  #keepBackup = false
+
+  # Mergetool will not prompt for every file.
+  # Use --prompt to override.
+  #prompt = false
+
+[diff "bin"]
+  # Use `hexdump` to diff binary files
+  textconv = hexdump -v -C
+
+[help]
+  # Automatically correct and execute mistyped commands
+  #autocorrect = 1
+
+  autocorrect = 10
+  # e.g.: $ git lgo
+  # WARNING: You called a Git command named 'lgo', which does not exist.
+  # Continuing under the assumption that you meant 'log'
+  # in 1.0 seconds automatically...
+
+[push]
+  # See `git help config` and search for "push.default"
+  # for more information on different options of the below setting.
+  # Setting to Git 2.0 default to surpress warning message
+  # If you use branches with different remote name, use "upstream"
+
+  # Push only the current branch
+  #
+  # default = simple #disabled for now to be compatible with debian wheezy
+
+  # Push all branches
+  #
+  # default = matching
+
+  # Make `git push` push relevant annotated tags when pushing branches out.
+  followTags = true
+
+# URL shorthands
+#
+# See `git help config` and search for "url.<base>"
+#
+# gh: is a shorthand for git@github.com
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+
+# github: is a shorthand for git://github.com/
+[url "git://github.com/"]
+  insteadOf = "github:"
+
+# gst: is a shorthand for git://gist.github.com/
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+
+# gist: is a shofthand for git://gist.github.com/
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
+
+[credential]
+  # cache the password for http-auth
+  helper = cache
+  # for "Git Credential Manager for Windows"
+  #helper = manager
+
+[log]
+  decorate = short
+
+[pager]
+  color = true
+  diff = diff-highlight | less
+  log = diff-highlight | less
+  show = diff-highlight | less
+
+[rebase]
+  # Use --autosquash by default. It's not like one would write !fixup message by accident.
+  autoSquash = true
+
+  # Use --autostash when running git pull --rebase and when rebasing interactively
+  autoStash = true
+
+[rerere]
+  enabled = true
+  # Reuse recorded resolution of conflicted merges
+  # see `man git-rerere'
+
+[hub]
+  protocol = https
+
+[init]
+  templatedir = ~/.git-templates
+
+[include]
+  path = .gitconfig.extra
+
+# =================== Nathan's gitconfig =====================
 
 [color]
   branch = auto
@@ -48,7 +534,3 @@
 
 [branch "master"]
   mergeoptions = --no-edit
-
-[user]
-	name = Nathan Kuik
-	email = NAKU0510@dsb.dk
