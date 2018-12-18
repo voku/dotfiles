@@ -139,4 +139,6 @@ export PATH=$PATH:"/mnt/c/terraform"
 
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
+sudo ./mount_drives.sh
+
 local_code
