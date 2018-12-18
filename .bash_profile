@@ -115,12 +115,20 @@ function hdrive {
      cd /mnt/h/code
 }
 
+function local_code {
+    cd /mnt/c/Users/naku0510/local_code
+}
+
 alias stt="C:/Program\ Files/Sublime\ Text\ 3/sublime_text.exe"
 
 HISTSIZE=5000
 HISTFILESIZE=10000
 
 shopt -s histappend
+
+# Sourch bash-git-prompt
+GIT_PROMPT_ONLY_IN_REPO=1
+source ~/.bash-git-prompt/gitprompt.sh
 
 # Add node to path
 export PATH=$PATH:"/mnt/c/program files/nodejs"
@@ -131,4 +139,4 @@ export PATH=$PATH:"/mnt/c/terraform"
 
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
-hdrive
+local_code
