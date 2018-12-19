@@ -9,5 +9,6 @@ if [ -f /etc/bashrc ]; then
       . /etc/bashrc
 fi
 
+source /usr/share/bash-completion/completions/git
 source ~/.bash_profile
 
