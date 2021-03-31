@@ -320,6 +320,15 @@ if [ -n "$ANDROID_SDK_ROOT" ]; then
   export ANDROID_HOME=$ANDROID_SDK_ROOT
   export PATH="$ANDROID_SDK_ROOT/tools/:$ANDROID_SDK_ROOT/platform-tools/:$PATH"
 fi
+if [ -d "$HOME/Android/Sdk" ]; then
+  export ANDROID_SDK=$HOME/Android/Sdk
+fi
+if [ -d "$HOME/Android/Sdk/platform-tools" ]; then
+  export PATH="$HOME/Android/Sdk/platform-tools:$PATH"
+fi
+if [ -d "$HOME/Android/Sdk/tools" ]; then
+  export PATH="$HOME/Android/Sdk/tools:$PATH"
+fi
 
 # ruby settings
 #
