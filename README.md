@@ -57,7 +57,7 @@ My `~/.extra` looks something like this:
 ```bash
 #!/bin/sh
 
-export DOTFILESSRCDIR="/home/lmoelleken/dotfiles/"
+export DOTFILESSRCDIR="/home/lars/dotfiles/"
 
 GIT_AUTHOR_NAME="Lars Moelleken"
 GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"

@@ -53,7 +53,7 @@
 # this is a comment reference to <ISSUE_KEY>
 # closes <ISSUE_KEY>
 #
-# exmaple: closes #34
+# example: closes #34
 # ---
 
 # ---
@@ -63,7 +63,7 @@
 # this is a comment reference to <ISSUE_KEY>
 # closes <ISSUE_KEY>
 #
-# exmaple: closes #34
+# example: closes #34
 # ---
 
 # For a full example of how to write a good commit message, check out

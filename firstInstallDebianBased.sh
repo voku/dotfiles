@@ -47,7 +47,6 @@ aptitude install \
   autoconf \
   make \
   cmake \
-  mktemp \
   dialog \
   `# unzip, unrar etc.` \
   cabextract \
@@ -77,6 +76,7 @@ aptitude install \
   `# utilities` \
   coreutils  \
   findutils  \
+  net-tools \
   `# fast alternative to dpkg -L and dpkg -S` \
   dlocate \
   `# quickly find files on the filesystem based on their name` \
@@ -116,16 +116,8 @@ aptitude install \
   `# fonts also "non-free"-fonts` \
   `# -- you need "multiverse" || "non-free" sources in your "source.list" -- ` \
   fontconfig \
-  ttf-freefont \
   ttf-mscorefonts-installer \
   ttf-bitstream-vera \
-  ttf-dejavu \
-  ttf-liberation \
-  ttf-linux-libertine \
-  ttf-larabie-deco \
-  ttf-larabie-straight \
-  ttf-larabie-uncommon \
-  ttf-liberation \
   xfonts-jmk \
   `# trace everything` \
   strace \
@@ -150,10 +142,10 @@ aptitude install \
   sqlite3 \
   perl \
   python \
-  python-pip \
   python-dev \
+  python3-pip \
   `# install python-pygments for json print` \
-  python-pygments
+  python3-pygments
 
 # try zsh?
 read -p "Do you want to use the zsh-shell? (y/n) " -n 1 yesOrNo
@@ -162,11 +154,6 @@ if [[ $yesOrNo =~ ^[Yy]$ ]]; then
   sudo aptitude install zsh
   chsh -s $(which zsh)
 fi
-
-#
-# fixing nodejs for ubuntu
-#
-ln -s /usr/bin/nodejs /usr/bin/node
 
 #
 # install java
@@ -228,13 +215,15 @@ if [[ $? -eq 1 ]]; then
 
   echo "update/install ruby-rems ..."
 
-  gem update --pre
+  aptitude install ruby ruby-dev
 
-  gem install sass --pre --verbose
-  gem install compass --pre --verbose
-  gem install autoprefixer-rails --pre --verbose
-  gem install compass-rgbapng --pre --verbose
-  gem install oily_png --verbose
+  gem update
+
+  gem install sass
+  gem install compass
+  gem install autoprefixer-rails
+  gem install compass-rgbapng
+  gem install oily_png
 
   echo "update/install npm-packages ..."
 
@@ -252,39 +241,9 @@ if [[ $? -eq 1 ]]; then
   npm install -g yo
   npm install -g svgo
 
-  echo "install php-5-extensions ..."
+  echo "install php ..."
 
-  aptitude install \
-    php5-cli \
-    php5-mysql \
-    php5-curl \
-    php5-gd \
-    php5-intl \
-    php-pear \
-    php5-imagick \
-    php5-imap \
-    php5-mcrypt \
-    php5-memcached \
-    php5-ming \
-    php5-ps \
-    php5-pspell \
-    php5-recode \
-    php5-snmp \
-    php5-sqlite \
-    php5-tidy \
-    php5-xmlrpc \
-    php5-xsl \
-    php5-xdebug \
-    php5-apcu \
-    php5-geoip
-
-  php5enmod json
-  php5enmod mcrypt
-  php5enmod curl
-  php5enmod mysql
-  php5enmod gd
-  php5enmod imagick
-  php5enmod apcu
+  aptitude install php php-cli php-bcmath php-dom php-curl php-gd php-intl php-imagick php-imap php-mbstring php-memcached php-mysqli php-mailparse php-json php-intl php-ftp php-readline php-snmp php-tidy php-xml php-xsl php-xdebug php-apcu php-zip
 
   curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin
   ln -s /usr/bin/composer.phar /usr/bin/composer
