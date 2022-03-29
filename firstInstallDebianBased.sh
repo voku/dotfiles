@@ -97,6 +97,8 @@ aptitude install \
   mytop \
   `# interactive I/O viewer` \
   iotop \
+  `# mysql tools` \
+  percona-toolkit \
   tree \
   `# disk usage viewer` \
   ncdu \
