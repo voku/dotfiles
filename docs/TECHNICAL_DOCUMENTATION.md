@@ -1,7 +1,7 @@
 # .dotfiles Technical Documentation
 
-**Version:** 1.0  
-**Target Audience:** Mixed developers (beginner to advanced)  
+**Version:** 1.0
+**Target Audience:** Mixed developers (beginner to advanced)
 **Last Updated:** 2026-01-15
 
 ---
@@ -342,8 +342,8 @@ COLOR_NO_COLOUR="\033[0m"
 │   ├── colors.theme.bash
 │   └── base.theme.bash
 ├── bash_prompt/                  # Bash prompt components
-│   ├── gitprompt.sh             # Git status in prompt
-│   └── gitstatus.sh             # Git status detection
+│   ├── gitprompt.sh              # Git status in prompt
+│   └── gitstatus.sh              # Git status detection
 ├── zsh_prompt/                   # ZSH prompt components
 ├── plugins/                      # Plugin system
 │   ├── available/               # Available plugins

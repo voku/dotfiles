@@ -31,20 +31,20 @@ The `.redpill` plugin system is inspired by oh-my-zsh and provides:
 │   └── *.theme.bash              # Additional themes
 │
 ├── bash_prompt/                  # Bash prompt components
-│   ├── gitprompt.sh             # Git-aware prompt
-│   ├── gitstatus.sh             # Git status detection
-│   └── prompt-colors.sh         # Prompt color definitions
+│   ├── gitprompt.sh              # Git-aware prompt
+│   ├── gitstatus.sh              # Git status detection
+│   └── prompt-colors.sh          # Prompt color definitions
 │
 ├── zsh_prompt/                   # ZSH prompt components
-│   └── zshrc.sh                 # ZSH prompt configuration
+│   └── zshrc.sh                  # ZSH prompt configuration
 │
 ├── plugins/                      # Plugin system
-│   ├── available/               # Available plugins
-│   │   ├── base.plugin.bash    # Base plugin (always loaded)
-│   │   ├── git.plugin.bash     # Git plugin
-│   │   └── *.plugin.bash       # Other plugins
-│   ├── enabled/                 # Enabled plugins (legacy)
-│   └── custom.plugins.bash      # User custom plugins
+│   ├── available/                # Available plugins
+│   │   ├── base.plugin.bash     # Base plugin (always loaded)
+│   │   ├── git.plugin.bash      # Git plugin
+│   │   └── *.plugin.bash        # Other plugins
+│   ├── enabled/                  # Enabled plugins (legacy)
+│   └── custom.plugins.bash       # User custom plugins
 │
 ├── aliases/                      # Plugin aliases
 │   ├── available/
@@ -81,9 +81,9 @@ From `~/.redpill/redpill-init-bash.sh`:
 
 3. **Load Libraries**: All files in `lib/*.bash`
    ```bash
-   lib="${REDPILL}/lib/*.bash"
-   for config_file in $lib; do
-     source $config_file
+   for config_file in ${REDPILL}/lib/*.bash; do
+     # This check handles the case where no .bash files exist in the lib directory
+     [ -f "$config_file" ] && source "$config_file"
    done
    ```
 
@@ -393,9 +393,12 @@ complete -F _deploy_completion deploy
 # Completion for custom project command
 _project_completion() {
   local cur="${COMP_WORDS[COMP_CWORD]}"
-  local projects=$(ls ~/projects/)
-  
-  COMPREPLY=($(compgen -W "$projects" -- "$cur"))
+  # Use a glob to safely get directory names instead of parsing `ls`.
+  local projects=()
+  for dir in ~/projects/*/; do
+    [[ -d "$dir" ]] && projects+=("$(basename "$dir")")
+  done
+  COMPREPLY=($(compgen -W "${projects[*]}" -- "$cur"))
 }
 complete -F _project_completion project
 ```

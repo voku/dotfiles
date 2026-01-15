@@ -98,7 +98,8 @@ cd dotfiles
 ./bootstrap.sh
 
 # 3. Add WSL-specific settings in ~/.extra
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+# Note: For Windows 11 with WSLg, this may not be required
+export DISPLAY=$(grep nameserver /etc/resolv.conf | awk '{print $2}'):0
 ```
 
 ---

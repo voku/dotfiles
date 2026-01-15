@@ -11,7 +11,7 @@ Welcome to the .dotfiles documentation! This directory contains comprehensive gu
 
 Topics covered:
 - Architecture Overview
-- Design Goals & Constraints  
+- Design Goals & Constraints
 - Layer Model / Diagram
 - Type Safety & Validation
 - Core Components

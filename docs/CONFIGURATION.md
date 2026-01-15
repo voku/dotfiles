@@ -189,18 +189,18 @@ The dotfiles automatically detect the operating system and set the `SYSTEM_TYPE`
 ```bash
 #!/bin/sh
 
-if [[ "$SYSTEM_TYPE" == "OSX" ]]; then
+if [ "$SYSTEM_TYPE" = "OSX" ]; then
   # macOS-specific configuration
   export JAVA_HOME=$(/usr/libexec/java_home)
   export HOMEBREW_NO_ANALYTICS=1
   
-elif [[ "$SYSTEM_TYPE" == "LINUX" ]]; then
+elif [ "$SYSTEM_TYPE" = "LINUX" ]; then
   # Linux-specific configuration
   export JAVA_HOME=/usr/lib/jvm/default-java
   alias pbcopy='xclip -selection clipboard'
   alias pbpaste='xclip -selection clipboard -o'
   
-elif [[ "$SYSTEM_TYPE" == "MINGW" ]] || [[ "$SYSTEM_TYPE" == "CYGWIN" ]]; then
+elif [ "$SYSTEM_TYPE" = "MINGW" -o "$SYSTEM_TYPE" = "CYGWIN" ]; then
   # Windows-specific configuration
   export EDITOR="notepad++"
 fi
