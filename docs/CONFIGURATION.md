@@ -77,7 +77,7 @@ A user-specific file for custom commands, aliases, functions, and environment va
 #!/bin/sh
 
 # Dotfiles source directory
-export DOTFILESSRCDIR="/home/john/dotfiles/"
+export DOTFILESSRCDIR="$HOME/dotfiles/"
 
 # Git user configuration
 GIT_AUTHOR_NAME="John Doe"
