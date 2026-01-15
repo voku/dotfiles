@@ -7,6 +7,7 @@
 ## :books: Documentation
 
 - **[Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md)** - Comprehensive technical guide covering architecture, design, components, and security
+- **[Functions & Aliases Guide](docs/FUNCTIONS_AND_ALIASES.md)** - Detailed guide to cherry-picking useful functions and aliases for your own dotfiles
 - **Quick Start** - See [Installation](#installation) below
 - **Customization** - See [Add custom commands](#add-custom-commands-without-creating-a-new-fork)
 

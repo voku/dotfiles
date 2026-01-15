@@ -40,6 +40,21 @@ Topics covered:
 
 ---
 
+### [Functions & Aliases Guide](FUNCTIONS_AND_ALIASES.md)
+**Detailed guide for cherry-picking functions and aliases.**
+
+Topics covered:
+- File structure and organization
+- How to cherry-pick individual functions/aliases
+- Top 10 most useful functions (mkd, extract, calc, etc.)
+- Top 20 most useful aliases (safety, navigation, git, etc.)
+- Complete function and alias reference
+- Integration tips and best practices
+
+**Best for**: Users wanting to cherry-pick specific features for their own dotfiles, understanding what utilities are available.
+
+---
+
 ### [Plugin System Guide](PLUGINS.md)
 **In-depth guide to the `.redpill` plugin system.**
 
@@ -100,6 +115,10 @@ New to the dotfiles? Follow this learning path:
 #### **Add custom commands or aliases**
 → [CONFIGURATION.md - User Customization](CONFIGURATION.md#user-customization-files)  
 → [PLUGINS.md - Custom Aliases](PLUGINS.md#custom-aliases)
+
+#### **Cherry-pick functions or aliases for my own dotfiles**
+→ [FUNCTIONS_AND_ALIASES.md](FUNCTIONS_AND_ALIASES.md)  
+→ [FUNCTIONS_AND_ALIASES.md - How to Cherry-Pick](FUNCTIONS_AND_ALIASES.md#how-to-cherry-pick)
 
 #### **Create a plugin**
 → [PLUGINS.md - Creating Custom Plugins](PLUGINS.md#creating-custom-plugins)
@@ -180,6 +199,7 @@ Improvements to documentation are welcome!
 | [CONFIGURATION.md](CONFIGURATION.md) | ✅ Complete | 2026-01-15 |
 | [PLUGINS.md](PLUGINS.md) | ✅ Complete | 2026-01-15 |
 | [RECIPES.md](RECIPES.md) | ✅ Complete | 2026-01-15 |
+| [FUNCTIONS_AND_ALIASES.md](FUNCTIONS_AND_ALIASES.md) | ✅ Complete | 2026-01-15 |
 
 ---
 
