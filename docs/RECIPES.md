@@ -174,7 +174,7 @@ function mkvenv() {
 }
 
 function pipreqs() {
-  about 'Generate requirements.txt from imports'
+  about 'Generate requirements.txt from installed packages'
   pip freeze > requirements.txt
   echo "requirements.txt created"
 }
