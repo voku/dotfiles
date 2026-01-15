@@ -267,7 +267,6 @@ about-completion 'myproject completion'
 
 _myproject_completion() {
   local cur="${COMP_WORDS[COMP_CWORD]}"
-  local cmd="${COMP_WORDS[1]}"
   
   if [[ $COMP_CWORD -eq 1 ]]; then
     COMPREPLY=($(compgen -W "init deploy status" -- "$cur"))
