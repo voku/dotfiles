@@ -7,6 +7,7 @@
 ## :books: Documentation
 
 - **[Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md)** - Comprehensive technical guide covering architecture, design, components, and security
+- **[Blind Spot Architect](docs/BLIND_SPOT_ARCHITECT.md)** - Confrontational documentation validation tool
 - **Quick Start** - See [Installation](#installation) below
 - **Customization** - See [Add custom commands](#add-custom-commands-without-creating-a-new-fork)
 
@@ -81,6 +82,16 @@ You could also use `~/.extra` to override settings, functions and aliases from m
 ## :wrench: Advanced Usage
 
 For detailed information about the architecture, components, and advanced usage patterns, see the **[Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md)**.
+
+### Documentation Validation
+
+Validate that your documentation matches reality with the Blind Spot Architect:
+
+```bash
+./bin/blind-spot-architect.sh
+```
+
+See **[Blind Spot Architect Documentation](docs/BLIND_SPOT_ARCHITECT.md)** for details on this confrontational documentation validation tool.
 
 ### Run the tests
 

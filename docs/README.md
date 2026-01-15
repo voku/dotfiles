@@ -73,6 +73,21 @@ Topics covered:
 
 ---
 
+### [Blind Spot Architect](BLIND_SPOT_ARCHITECT.md)
+**Confrontational documentation validation tool.**
+
+Topics covered:
+- Context clarification loop
+- Psychological interrogation
+- Pattern recognition (behavioral loops)
+- Cost calculation
+- Delusion challenge
+- Forced action steps
+
+**Best for**: Validating documentation accuracy, exposing gaps between intent and reality, forcing immediate documentation fixes.
+
+---
+
 ## 🚀 Quick Start
 
 New to the dotfiles? Follow this learning path:
@@ -122,6 +137,10 @@ New to the dotfiles? Follow this learning path:
 → [TECHNICAL_DOCUMENTATION.md - Critical Pitfalls](TECHNICAL_DOCUMENTATION.md#critical-pitfalls)  
 → [CONFIGURATION.md - Troubleshooting](CONFIGURATION.md#troubleshooting)  
 → [PLUGINS.md - Troubleshooting](PLUGINS.md#troubleshooting)
+
+#### **Validate documentation accuracy**
+→ [BLIND_SPOT_ARCHITECT.md](BLIND_SPOT_ARCHITECT.md)  
+→ [BLIND_SPOT_ARCHITECT.md - Usage](BLIND_SPOT_ARCHITECT.md#usage)
 
 #### **Ensure security**
 → [TECHNICAL_DOCUMENTATION.md - Security Considerations](TECHNICAL_DOCUMENTATION.md#security-considerations)
@@ -180,6 +199,7 @@ Improvements to documentation are welcome!
 | [CONFIGURATION.md](CONFIGURATION.md) | ✅ Complete | 2026-01-15 |
 | [PLUGINS.md](PLUGINS.md) | ✅ Complete | 2026-01-15 |
 | [RECIPES.md](RECIPES.md) | ✅ Complete | 2026-01-15 |
+| [BLIND_SPOT_ARCHITECT.md](BLIND_SPOT_ARCHITECT.md) | ✅ Complete | 2026-01-15 |
 
 ---
 
