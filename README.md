@@ -12,7 +12,7 @@
 
 ## Requirements
 
-- **Bash:** Version 3.2+ (with some limitations) or 4.0+ recommended for full feature support
+- **Bash:** Version 3.2+ (some features limited) or 4.0+ recommended for full feature support including associative arrays
 - **ZSH:** Version 5.0+ recommended
 - **Git:** Required for installation and updates
 - **Optional:** rsync (for faster file copying during bootstrap)
@@ -125,7 +125,10 @@ The `bin/` directory contains useful command-line tools:
 - `os-detect.sh` - Operating system detection
 - `burl` - Browser URL launcher
 - `du-ext.pl` - Disk usage by file extension
-- And more...
+- `matrix.sh` - Fun terminal matrix effect
+- `mysql_rename_database.sh` - MySQL database helper
+- `pinhole.py` - Network diagnostic tool
+- `gov.sh` - Government data utilities
 
 ## Feedback
 
