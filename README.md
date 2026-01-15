@@ -4,6 +4,12 @@
 
 --> [Screenshots & Screencasts](https://github.com/voku/dotfiles/wiki/Images)
 
+## :books: Documentation
+
+- **[Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md)** - Comprehensive technical guide covering architecture, design, components, and security
+- **Quick Start** - See [Installation](#installation) below
+- **Customization** - See [Add custom commands](#add-custom-commands-without-creating-a-new-fork)
+
 ## Installation
 
 ### Using Git and the bootstrap script
@@ -72,13 +78,24 @@ git config --file=$HOME/.gitconfig.extra push.default simple
 
 You could also use `~/.extra` to override settings, functions and aliases from my dotfiles repository. It’s probably better to [fork this repository](https://github.com/voku/dotfiles/fork) instead, though. And you can use `~/.vimrc.extra` to edit the vim settings without touching the main configuration.
 
-## Run the tests
+## :wrench: Advanced Usage
 
-e.g.:
+For detailed information about the architecture, components, and advanced usage patterns, see the **[Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md)**.
+
+### Run the tests
+
 ```bash
 bash .redpill/tests/functions-tests.sh
 zsh .redpill/tests/functions-tests.sh
 ```
+
+### Key Features
+
+- **Modular Architecture**: Separate configuration files for aliases, functions, exports, and more
+- **Plugin System**: Extensible `.redpill` plugin architecture with themes and Git integration  
+- **Cross-Platform**: Works on Linux, macOS, Windows (Git Bash/Cygwin/WSL)
+- **Safe Defaults**: Built-in safety mechanisms for file operations
+- **Easy Customization**: Use `.extra` and `.config_dotfiles` for personal settings without forking
 
 ## Feedback
 
