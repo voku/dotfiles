@@ -479,7 +479,7 @@ export DOTFILESSRCDIR="$HOME/dotfiles"
 # ~/.extra
 #!/bin/sh
 
-if [[ "$SYSTEM_TYPE" == "OSX" ]]; then
+if [ "$SYSTEM_TYPE" = "OSX" ]; then
   # macOS-specific
   export JAVA_HOME=$(/usr/libexec/java_home)
   alias ls='ls -G'
@@ -488,7 +488,7 @@ if [[ "$SYSTEM_TYPE" == "OSX" ]]; then
   # Homebrew
   export PATH="/usr/local/bin:$PATH"
   
-elif [[ "$SYSTEM_TYPE" == "LINUX" ]]; then
+elif [ "$SYSTEM_TYPE" = "LINUX" ]; then
   # Linux-specific
   export JAVA_HOME=/usr/lib/jvm/default-java
   alias ls='ls --color=auto'
@@ -499,7 +499,7 @@ elif [[ "$SYSTEM_TYPE" == "LINUX" ]]; then
   alias aptup='sudo apt update && sudo apt upgrade -y'
   alias aptin='sudo apt install'
   
-elif [[ "$SYSTEM_TYPE" == "MINGW" ]] || [[ "$SYSTEM_TYPE" == "CYGWIN" ]]; then
+elif [ "$SYSTEM_TYPE" = "MINGW" -o "$SYSTEM_TYPE" = "CYGWIN" ]; then
   # Windows-specific
   export PATH="/c/Program Files/tools:$PATH"
   alias open='explorer'
@@ -523,11 +523,11 @@ git clone https://github.com/company/team-dotfiles.git
 #!/bin/sh
 
 # Source team-specific configuration
-if [[ -f "$HOME/team-dotfiles/.team_aliases" ]]; then
+if [ -f "$HOME/team-dotfiles/.team_aliases" ]; then
   source "$HOME/team-dotfiles/.team_aliases"
 fi
 
-if [[ -f "$HOME/team-dotfiles/.team_functions" ]]; then
+if [ -f "$HOME/team-dotfiles/.team_functions" ]; then
   source "$HOME/team-dotfiles/.team_functions"
 fi
 ```
