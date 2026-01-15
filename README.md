@@ -10,6 +10,13 @@
 - **Quick Start** - See [Installation](#installation) below
 - **Customization** - See [Add custom commands](#add-custom-commands-without-creating-a-new-fork)
 
+## Requirements
+
+- **Bash:** Version 3.2+ (with some limitations) or 4.0+ recommended for full feature support
+- **ZSH:** Version 5.0+ recommended
+- **Git:** Required for installation and updates
+- **Optional:** rsync (for faster file copying during bootstrap)
+
 ## Installation
 
 ### Using Git and the bootstrap script
@@ -40,7 +47,7 @@ To update, `cd` into your local `dotfiles` repository and then:
 
 If `~/.config_dotfiles` does not exists, the "bootstrap.sh"-script will create a default config for you.
 
-My `~/.config_dotfiles` looks something like this:
+My `~/.config_dotfiles` looks something like this (this is a personalized example; the default config only includes the `git` plugin for both bash and zsh):
 
 ```bash
 #!/bin/sh
@@ -92,10 +99,33 @@ zsh .redpill/tests/functions-tests.sh
 ### Key Features
 
 - **Modular Architecture**: Separate configuration files for aliases, functions, exports, and more
-- **Plugin System**: Extensible `.redpill` plugin architecture with themes and Git integration  
+- **Plugin System**: Extensible `.redpill` plugin architecture with themes and Git integration (see [Plugin Documentation](docs/PLUGINS.md))
 - **Cross-Platform**: Works on Linux, macOS, Windows (Git Bash/Cygwin/WSL)
-- **Safe Defaults**: Built-in safety mechanisms for file operations
+- **Safe Defaults**: Built-in safety mechanisms for file operations (e.g., `rm -I` instead of `rm`)
 - **Easy Customization**: Use `.extra` and `.config_dotfiles` for personal settings without forking
+- **Utility Tools**: Includes helpful scripts in `bin/` for git management, optimization, and more
+
+### Included Utility Tools
+
+The `bin/` directory contains useful command-line tools:
+
+**Git Utilities:**
+- `git-branch-status` - Display branch tracking information
+- `git-remove-merged-branches.sh` - Clean up merged branches
+- `gitstatus.sh` / `gitstatus.py` - Git status helpers
+- `diff-highlight` - Enhanced diff highlighting
+
+**Performance & Optimization:**
+- `img-min.sh` - Image minification
+- `browser-optimizer.sh` - Browser optimization
+- `speedtest_cli.py` - Network speed testing
+- `httpcompression` - HTTP compression testing
+
+**Other Utilities:**
+- `os-detect.sh` - Operating system detection
+- `burl` - Browser URL launcher
+- `du-ext.pl` - Disk usage by file extension
+- And more...
 
 ## Feedback
 
