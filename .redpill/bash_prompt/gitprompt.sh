@@ -187,7 +187,7 @@ function gp_maybe_set_envar_to_path() {
 
 git_prompt_reset() {
   local var
-  for var in GIT_PROMPT_DIR_BASH __GIT_PROMPT_COLORS_FILE __PROMPT_COLORS_FILE __GIT_STATUS_CMD GIT_PROMPT_THEME_NAME; do
+  for var in __GIT_PROMPT_DIR_BASH __GIT_PROMPT_COLORS_FILE __PROMPT_COLORS_FILE __GIT_STATUS_CMD GIT_PROMPT_THEME_NAME; do
     unset $var
   done
 }

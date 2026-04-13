@@ -59,6 +59,10 @@ for config_file in $custom; do
 done
 
 # prompt
+# Explicitly set __GIT_PROMPT_DIR_BASH so gitprompt.sh does not have to rely
+# on BASH_SOURCE[0] resolution, which can fail in some bash environments
+# (e.g. when switching from zsh to bash, or inside WSL). See issue #38.
+export __GIT_PROMPT_DIR_BASH="${REDPILL}/bash_prompt"
 source "${REDPILL}/bash_prompt/gitprompt.sh"
 
 unset file_type
